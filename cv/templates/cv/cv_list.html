@@ -1,0 +1,75 @@
+{% extends 'cv/base.html' %}
+{% block content %}
+
+	<div class="section-header">
+		<h1 class="personal-detail-header">Personal Details{% if user.is_authenticated %}<a href="{% url 'personal_detail_new' %}" class="section-menu"><span class="glyphicon glyphicon-plus"></span></a>{% endif %}</h1>
+	</div>
+	{% for personalDetail in personalDetails %}
+		<div class="post">
+			<div class="full-name">
+				<h2><a href="">{{ personalDetail.first_name }} {{ personalDetail.last_name }}</a> {% if user.is_authenticated %}<a class="btn btn-default" href="{% url 'personal_detail_edit' pk=personalDetail.pk %}"><span class="glyphicon glyphicon-pencil"></span></a><a class="btn btn-default" href="{% url 'personal_detail_remove' pk=personalDetail.pk %}"><span class="glyphicon glyphicon-remove"></span></a>{% endif %}</h2>
+			</div>
+			<div class="email">
+				<p>E-mail: {{ personalDetail.email }}</p>
+			</div>
+			<div class="mobile-number">
+				<p>Mobile Number: {{ personalDetail.mobile_number }}</p>
+			</div>
+		</div>
+	{% endfor %}
+	<hr class="dotted-break">
+	
+	<div class="section-header">
+		<h1 class="personal-statement-header">Personal Statement{% if user.is_authenticated %}<a href="{% url 'personal_statement_new' %}" class="section-menu"><span class="glyphicon glyphicon-plus"></span></a>{% endif %}</h1>
+	</div>
+	{% for personalStatement in personalStatements %}
+		<div class="post">
+			<h2>{% if user.is_authenticated %}<a class="btn btn-default" href="{% url 'personal_statement_edit' pk=personalStatement.pk %}"><span class="glyphicon glyphicon-pencil"></span></a><a class="btn btn-default" href="{% url 'personal_statement_remove' pk=personalStatement.pk %}"><span class="glyphicon glyphicon-remove"></span></a>{% endif %}</h2>
+			<p>{{ personalStatement.text|linebreaksbr }}</p>
+		</div>
+	{% endfor %}
+	<hr class="dotted-break">
+	
+	<div class="section-header">
+		<h1 class="education-header">Education{% if user.is_authenticated %}<a href="{% url 'education_new' %}" class="section-menu"><span class="glyphicon glyphicon-plus"></span></a>{% endif %}</h1>
+	</div>
+	{% for education in educations %}
+		<div class="post">
+			<div class="date">
+				<p>started: {{ education.started_date }} <br/> finished: {{ education.finished_date }}</p>
+			</div>
+			<h2><a href="">{{ education.establishment_name }}</a> {% if user.is_authenticated %}<a class="btn btn-default" href="{% url 'education_edit' pk=education.pk %}"><span class="glyphicon glyphicon-pencil"></span></a><a class="btn btn-default" href="{% url 'education_remove' pk=education.pk %}"><span class="glyphicon glyphicon-remove"></span></a>{% endif %}</h2>
+			<p>Location: {{ education.establishment_address|linebreaksbr }}</p>
+			<p>{{ education.text|linebreaksbr }}</p>
+		</div>
+	{% endfor %}
+	<hr class="dotted-break">
+	
+	<div class="section-header">
+		<h1 class="work-experience-header">Work Experience{% if user.is_authenticated %}<a href="{% url 'work_experience_new' %}" class="section-menu"><span class="glyphicon glyphicon-plus"></span></a>{% endif %}</h1>
+	</div>
+	{% for workExperience in workExperiences %}
+		<div class="post">
+			<div class="date">
+				<p>started: {{ workExperience.started_date }} <br/> finished: {{ workExperience.finished_date }}</p>
+			</div>
+			<h2><a href="">{{ workExperience.establishment_name }}</a> {% if user.is_authenticated %}<a class="btn btn-default" href="{% url 'work_experience_edit' pk=workExperience.pk %}"><span class="glyphicon glyphicon-pencil"></span></a><a class="btn btn-default" href="{% url 'work_experience_remove' pk=workExperience.pk %}"><span class="glyphicon glyphicon-remove"></span></a>{% endif %}</h2>
+			<p>Location: {{ workExperience.establishment_address|linebreaksbr }}</p>
+			<p>Email: {{ workExperience.establishment_email|linebreaksbr }}</p>
+			<p>{{ workExperience.text|linebreaksbr }}</p>
+		</div>
+	{% endfor %}
+	<hr class="dotted-break">
+	
+	<div class="section-header">
+		<h1 class="personal-interests-header">Personal Interests{% if user.is_authenticated %}<a href="{% url 'personal_interest_new' %}" class="section-menu"><span class="glyphicon glyphicon-plus"></span></a>{% endif %}</h1>
+	</div>
+	{% for personalInterest in personalInterests %}
+		<div class="post">
+			<h2>{% if user.is_authenticated %}<a class="btn btn-default" href="{% url 'personal_interest_edit' pk=personalInterest.pk %}"><span class="glyphicon glyphicon-pencil"></span></a><a class="btn btn-default" href="{% url 'personal_interest_remove' pk=personalInterest.pk %}"><span class="glyphicon glyphicon-remove"></span></a>{% endif %}</h2>
+			<p>{{ personalInterest.text|linebreaksbr }}</p>
+		</div>
+	{% endfor %}
+	<hr class="dotted-break">
+	
+{% endblock %}
